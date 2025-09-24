@@ -7,20 +7,20 @@ It lets you use TagLib easily inside Qt projects without needing to link directl
 
 ## 📂 Project Structure
 
-QAudioTagReader/
-│
-├── CMakeLists.txt # Root CMake (adds TagLib + src + examples)
-├── src/ # QAudioTagReader library
-│ ├── CMakeLists.txt
-│ ├── qaudiotagreader.h
-│ └── qaudiotagreader.cpp
-│
-├── examples/ # Example app using the library
-│ ├── CMakeLists.txt
-│ └── main.cpp
-│
-└── third_party/
-└── taglib/ # TagLib source (as submodule or manually copied)
+QAudioTagReader \
+│ \
+├── CMakeLists.txt  \
+├── src/\
+│ ├── CMakeLists.txt \
+│ ├── qaudiotagreader.h \
+│ └── qaudiotagreader.cpp \
+│\
+├── examples/\
+│ ├── CMakeLists.txt\
+│ └── main.cpp\
+│\
+└── third_party/\
+└── taglib/ 
 
 
 ---
@@ -59,3 +59,52 @@ cmake .. -DCMAKE_PREFIX_PATH=/path/to/Qt
 
 # Build
 cmake --build .
+
+```
+▶️ Example Usage
+
+Run the example app with an audio file:
+
+```
+./examples/QAudioTagReaderExample song.mp3
+```
+
+Example output:
+```
+title : "My Song"
+artist : "Some Artist"
+album : "Some Album"
+genre : "Pop"
+year : "2023"
+track : "1"
+```
+
+📦 Linking in Your Own Qt Project
+
+In your CMake project:
+```
+find_package(QAudioTagReader REQUIRED)
+
+target_link_libraries(MyApp PRIVATE QAudioTagReader)
+```
+
+In code:
+```
+#include "qaudiotagreader.h"
+
+QAudioTagReader reader;
+if (reader.open("song.mp3")) {
+    auto tags = reader.tags();
+    for (auto it = tags.begin(); it != tags.end(); ++it) {
+        qDebug() << it.key() << ":" << it.value();
+    }
+}
+
+```
+⚠️ Notes
+
+On Windows, the .dll file must be next to your app executable.
+
+On Linux/macOS, you may need to adjust LD_LIBRARY_PATH / DYLD_LIBRARY_PATH if you don’t install system-wide.
+
+If you can’t fetch TagLib with submodules (e.g. restricted network), you can download TagLib as ZIP from GitHub and place it manually in third_party/taglib.
