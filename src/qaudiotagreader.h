@@ -5,31 +5,29 @@
 #include <QObject>
 #include <QString>
 #include <QMap>
+#include <memory>
+#include "qaudiotag.h"
+#include "qreader.h"
+#include "qaudiotagreader_global.h"
 
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
 
-#if defined(QAUDIOTAGREADER_LIBRARY)
-#  define QAUDIOTAGREADER_EXPORT Q_DECL_EXPORT
-#else
-#  define QAUDIOTAGREADER_EXPORT Q_DECL_IMPORT
-#endif
+namespace QMediaTag {
 
-class QAUDIOTAGREADER_EXPORT QAudioTagReader : public QObject
+class QAUDIOTAGREADER_EXPORT QAudioTagReader : public QObject,
+                                               public QReader,
+                                               public QAudioTag
 {
     Q_OBJECT
 
 public:
-    explicit QAudioTagReader(QObject *parent = nullptr);
+    explicit QAudioTagReader(QString filePath = "",QObject *parent = nullptr);
     ~QAudioTagReader();
-
-    bool open(const QString &filePath);
-    QMap<QString, QString> tags() const;
+    bool read(const QString &filePath) Q_DECL_OVERRIDE;
     void close();
 
 private:
     QString m_filePath;
-    std::unique_ptr<TagLib::FileRef> m_fileRef;
+    QFileRef m_fileRef;
 };
-
+}
 #endif

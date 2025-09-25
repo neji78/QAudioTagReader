@@ -54,6 +54,7 @@ git submodule update --init --recursive
 # Create build directory
 mkdir build && cd build
 
+
 # Configure (adjust /path/to/Qt to your Qt installation)
 cmake .. -DCMAKE_PREFIX_PATH=/path/to/Qt
 
