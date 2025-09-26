@@ -27,7 +27,6 @@ QAudioTagReader \
 
 ## 🚀 Features
 - Read tags from MP3, FLAC, OGG, WAV, etc.  
-- Exports metadata as a `QMap<QString, QString>` for easy use in Qt apps.  
 - Builds as a shared library (`.dll` / `.so` / `.dylib`).  
 - Bundles TagLib source via `third_party/taglib` so no external dependency is required.
 
