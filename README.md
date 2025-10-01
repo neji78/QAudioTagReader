@@ -6,21 +6,22 @@ It lets you use TagLib easily inside Qt projects without needing to link directl
 ---
 
 ## 📂 Project Structure
-
-QAudioTagReader \
-│ \
-├── CMakeLists.txt  \
-├── src/\
-│ ├── CMakeLists.txt \
-│ ├── qaudiotagreader.h \
-│ └── qaudiotagreader.cpp \
-│\
-├── examples/\
-│ ├── CMakeLists.txt\
-│ └── main.cpp\
-│\
-└── third_party/\
-└── taglib/ 
+```
+QAudioTagReader 
+│ 
+├── CMakeLists.txt 
+├── src/
+│     ├── CMakeLists.txt 
+│     ├── qaudiotagreader.h 
+│     └── qaudiotagreader.cpp 
+│
+├── examples/
+│     ├── CMakeLists.txt
+│     └── main.cpp
+│
+└── third_party/
+      └── taglib/
+```
 
 
 ---
